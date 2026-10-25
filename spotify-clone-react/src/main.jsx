@@ -1,4 +1,5 @@
 import React from "react";
+import MusicPlayer from "./MusicPlayer.jsx";
 import { createRoot } from "react-dom/client";
 import Home from "./Home.jsx";
 
