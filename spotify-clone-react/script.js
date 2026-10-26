@@ -49,92 +49,44 @@
   // All files should be inside public/music/.
   // ---------------------------------------------------------
 
-  const tracks = [
-    {
-      title: "52 Bars",
-      artist: "Karan Aujla",
-      album: "52 Bars",
-      audioUrl: "/music/52%20Bars.mp3",
-      cover: "https://images.unsplash.com/photo-1516280440614-37939bbacd81?w=400"
-    },
-    {
-      title: "Mexico",
-      artist: "Karan Aujla",
-      album: "Mexico",
-      audioUrl: "/music/Mexico%20Full%20Song.mp3",
-      cover: "https://images.unsplash.com/photo-1519608487953-e999c86e7455?w=400"
-    },
-    {
-      title: "Winning Speech",
-      artist: "Karan Aujla",
-      album: "Winning Speech",
-      audioUrl: "/music/Winning%20Speech%20Karan%20Aujla.mp3",
-      cover: "https://images.unsplash.com/photo-1501386761578-eac5c94b800a?w=400"
-    },
-    {
-      title: "Tauba Tauba",
-      artist: "Karan Aujla",
-      album: "Tauba Tauba",
-      audioUrl: "/music/tauba-tauba.mp3",
-      cover: "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400"
-    },
-    {
-      title: "Softly",
-      artist: "Karan Aujla",
-      album: "Softly",
-      audioUrl: "/music/softly.mp3",
-      cover: "https://images.unsplash.com/photo-1516280440614-37939bbacd81?w=400"
-    },
-    {
-      title: "Admirin' You",
-      artist: "Karan Aujla",
-      album: "Admirin' You",
-      audioUrl: "/music/admirin-you.mp3",
-      cover: "https://images.unsplash.com/photo-1501386761578-eac5c94b800a?w=400"
-    },
-    {
-      title: "Players",
-      artist: "Karan Aujla",
-      album: "Players",
-      audioUrl: "/music/players.mp3",
-      cover: "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400"
-    },
-    {
-      title: "Hukam",
-      artist: "Karan Aujla",
-      album: "Hukam",
-      audioUrl: "/music/hukam.mp3",
-      cover: "https://images.unsplash.com/photo-1516280440614-37939bbacd81?w=400"
-    },
-    {
-      title: "Perfect",
-      artist: "Ed Sheeran",
-      album: "Perfect",
-      audioUrl: "/music/perfect.mp3",
-      cover: "https://images.unsplash.com/photo-1510915361894-db8b60106cb1?w=400"
-    },
-    {
-      title: "Tum Hi Ho",
-      artist: "Arijit Singh",
-      album: "Aashiqui 2",
-      audioUrl: "/music/tum-hi-ho.mp3",
-      cover: "https://images.unsplash.com/photo-1516280440614-37939bbacd81?w=400"
-    },
-    {
-      title: "Excuses",
-      artist: "AP Dhillon",
-      album: "Excuses",
-      audioUrl: "/music/excuses.mp3",
-      cover: "https://images.unsplash.com/photo-1501386761578-eac5c94b800a?w=400"
-    },
-    {
-      title: "Blinding Lights",
-      artist: "The Weeknd",
-      album: "After Hours",
-      audioUrl: "/music/blinding-lights.mp3",
-      cover: "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400"
-    }
-  ];
+  
+const tracks = [
+  {
+    title: "52 Bars",
+    artist: "Karan Aujla",
+    album: "52 Bars",
+    audioUrl: "/music/52%20Bars.mp3",
+    cover: ""
+  },
+  {
+    title: "Mexico",
+    artist: "Karan Aujla",
+    album: "Mexico",
+    audioUrl: "/music/Mexico%20Full%20Song.mp3",
+    cover: ""
+  },
+  {
+    title: "Born To Shine",
+    artist: "Diljit Dosanjh",
+    album: "G.O.A.T.",
+    audioUrl: "/music/Born_To_Shine_1.mp3",
+    cover: ""
+  },
+  {
+    title: "Excuses",
+    artist: "AP Dhillon",
+    album: "Excuses",
+    audioUrl: "/music/Excuses_1.mp3",
+    cover: ""
+  },
+  {
+    title: "Tum Hi Ho",
+    artist: "Arijit Singh",
+    album: "Aashiqui 2",
+    audioUrl: "/music/Tum%20Hi%20Ho%20Aashiqui%202%20128%20Kbps.mp3",
+    cover: ""
+  }
+];
 
   // ---------------------------------------------------------
   // 3. AUDIO PLAYER STATE
@@ -242,41 +194,63 @@
     document.body.classList.toggle("is-playing", playing);
   }
 
-  function updateNowPlaying(track) {
-    if (!track) return;
+function updateNowPlaying(track) {
+  if (!track) return;
 
-    const panel = $(".now-playing");
+  const panel = $(".now-playing");
 
-    if (panel) {
-      const image = $("img", panel);
-      const title = $("strong", panel);
-      const artist = $("span", panel);
+  if (panel) {
+    const image = $("img", panel);
+    const title = $("strong", panel);
+    const artist = $("span", panel);
 
-      if (image) {
+    // Show cover only if the track has one
+    if (image) {
+      if (track.cover) {
         image.src = track.cover;
         image.alt = `${track.title} cover`;
-      }
-
-      if (title) title.textContent = track.title;
-      if (artist) artist.textContent = track.artist;
-
-      const heart = $(".fa-heart", panel);
-
-      if (heart) {
-        const liked = getLiked().includes(trackKey(track));
-
-        heart.classList.toggle("fa-solid", liked);
-        heart.classList.toggle("fa-regular", !liked);
+        image.style.display = "";
+      } else {
+        image.removeAttribute("src");
+        image.alt = "";
+        image.style.display = "none";
       }
     }
 
-    document.title = `${track.title} - ${track.artist} | Spotify Clone`;
+    // Update song title and artist
+    if (title) {
+      title.textContent = track.title;
+    }
 
-    $$(".song-row").forEach(row => {
-      const rowTitle = $("strong", row)?.textContent.trim();
-      row.classList.toggle("playing", rowTitle === track.title);
-    });
+    if (artist) {
+      artist.textContent = track.artist;
+    }
+
+    // Update liked-song heart icon
+    const heart = $(".fa-heart", panel);
+
+    if (heart) {
+      const liked = getLiked().includes(trackKey(track));
+
+      heart.classList.toggle("fa-solid", liked);
+      heart.classList.toggle("fa-regular", !liked);
+    }
   }
+
+  // Update browser tab title
+  document.title =
+    `${track.title} - ${track.artist} | Spotify Clone`;
+
+  // Highlight the currently playing song
+  $$(".song-row").forEach(row => {
+    const rowTitle = $("strong", row)?.textContent.trim();
+
+    row.classList.toggle(
+      "playing",
+      rowTitle === track.title
+    );
+  });
+}
 
   function rememberRecentlyPlayed(track) {
     const key = trackKey(track);

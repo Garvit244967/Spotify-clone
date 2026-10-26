@@ -1,22 +1,42 @@
 
 import { useRef, useState } from "react";
-
-// Import MP3 files from the project's music folder
 import song52 from "../music/52 Bars.mp3";
 import songMexico from "../music/Mexico Full Song.mp3";
+import songBorn from "../music/Born_To_Shine_1.mp3";
+import songExcuses from "../music/Excuses_1.mp3";
+import songTumHiHo from "../music/Tum Hi Ho Aashiqui 2 128 Kbps.mp3";
+
+
 
 const songs = [
   {
     title: "52 Bars",
-    artist: "Punjabi Music",
-    src: song52,
+    artist: "Karan Aujla",
+    src: "/music/52%20Bars.mp3"
+  },
+  {
+    title: "Born To Shine",
+    artist: "Diljit Dosanjh",
+    src: "/music/Born_To_Shine_1.mp3"
+  },
+  {
+    title: "Excuses",
+    artist: "AP Dhillon",
+    src: "/music/Excuses_1.mp3"
   },
   {
     title: "Mexico Full Song",
-    artist: "Punjabi Music",
-    src: songMexico,
+    artist: "Unknown",
+    src: "/music/Mexico%20Full%20Song.mp3"
   },
+  {
+    title: "Tum Hi Ho",
+    artist: "Arijit Singh",
+    src: "/music/Tum%20Hi%20Ho%20Aashiqui%202%20128%20Kbps.mp3"
+  }
 ];
+
+
 
 export default function MusicPlayer() {
   const audioRef = useRef(null);
